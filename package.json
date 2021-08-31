@@ -8,7 +8,7 @@
     "dev": "node ace serve --watch",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
-    "commit": "git cz",
+    "c": "git cz",
     "test": "jest"
   },
   "devDependencies": {
