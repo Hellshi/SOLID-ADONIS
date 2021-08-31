@@ -19,7 +19,9 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import { validateMail } from 'App/Validators/email-validator'
 
 Route.get('/', async () => {
-  return { hello: 'world' }
+  const valid = await validateMail('a')
+  console.log(valid)
 })
