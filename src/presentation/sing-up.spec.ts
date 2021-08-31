@@ -29,4 +29,29 @@ describe('', () => {
     const httpResponse = await singUp.handle(httpRequest)
     expect(httpResponse!.statusCode).toBe(400)
   })
+
+  it('SingUp should return 400 when no password is provided', async () => {
+    const singUp = makeSut()
+    const httpRequest = {
+      body: {
+        email: 'from@hell.com',
+        name: 'HELLLLLL',
+        passwordConfirmation: '123456',
+      },
+    }
+    const httpResponse = await singUp.handle(httpRequest)
+    expect(httpResponse!.statusCode).toBe(400)
+  })
+  it('SingUp should return 400 when no passwordConfirmation is provided', async () => {
+    const singUp = makeSut()
+    const httpRequest = {
+      body: {
+        email: 'from@hell.com',
+        name: 'HELLLLLL',
+        password: '123456',
+      },
+    }
+    const httpResponse = await singUp.handle(httpRequest)
+    expect(httpResponse!.statusCode).toBe(400)
+  })
 })

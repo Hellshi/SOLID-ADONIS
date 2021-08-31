@@ -15,6 +15,18 @@ export class SingUpController implements Controller {
         statusCode: 400,
       }
     }
+    if (!httpResquest.body.password) {
+      return {
+        body: 'missing password',
+        statusCode: 400,
+      }
+    }
+    if (!httpResquest.body.passwordConfirmation) {
+      return {
+        body: 'missing confirmation',
+        statusCode: 400,
+      }
+    }
     return {
       statusCode: 200,
       body: '',
