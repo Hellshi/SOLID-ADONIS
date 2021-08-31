@@ -1,9 +1,16 @@
 export class SingUpController {
-  public handle = (_body: {}) => {
-    const httpResponse = {
-      body: '',
-      statusCode: 400,
+  public handle = (body?: any) => {
+    if (!body.name) {
+      return {
+        body: 'Missing name',
+        statusCode: 400,
+      }
     }
-    return httpResponse
+    if (!body.email) {
+      return {
+        body: 'missing email',
+        statusCode: 400,
+      }
+    }
   }
 }
