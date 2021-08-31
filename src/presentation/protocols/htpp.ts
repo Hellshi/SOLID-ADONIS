@@ -4,5 +4,5 @@ export interface HttRequest {
 
 export interface HttpResponse {
   statusCode: number
-  body: string
+  body: any
 }
