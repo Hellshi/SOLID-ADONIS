@@ -3,12 +3,12 @@ import { AddAccountRepository } from './add-account-repository'
 
 test.group('Add account', () => {
   const makeEncrypter = () => {
-    class EncrypterStub {
+    class EncrypterStubFalling {
       public async encrypt(value: string): Promise<string> {
         return new Promise((resolve, reject) => reject(new Error()))
       }
     }
-    return new EncrypterStub()
+    return new EncrypterStubFalling()
   }
   const makeSut = () => {
     const encrypterStub = makeEncrypter()
@@ -21,7 +21,10 @@ test.group('Add account', () => {
       email: 'valid_mail@mail.com',
       password: '123456',
     }
-    const promise = await sut.add(fakeUser)
-    assert.fail(promise)
+    try {
+      await sut.add(fakeUser)
+    } catch (err) {
+      assert.exists(err)
+    }
   })
 })

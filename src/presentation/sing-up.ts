@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { AddAccount } from 'src/data/use-cases/add-account'
+import { AddAccount } from 'src/domain/use-cases/add-account'
 import { ServerError } from './error/internal-server-error'
 import { InvalidParamError } from './error/invalid-param-error'
 import { MissingParamError } from './error/missing-param-error'
