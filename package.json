@@ -9,11 +9,13 @@
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
     "c": "git cz",
-    "test": "jest"
+    "test": "jest",
+    "japa": "node -r @adonisjs/assembler/build/register japaFile.ts"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.0.0",
     "@types/jest": "^27.0.1",
+    "adonis-jest": "^2.0.1",
     "adonis-preset-ts": "^2.1.0",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "^7.32.0",

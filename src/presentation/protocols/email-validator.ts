@@ -1,4 +1,4 @@
 /* eslint-disable prettier/prettier */
 export interface EmailValidator {
-  isValid(email: string): boolean
+  isValid(email: string): Promise<Boolean>
 }

@@ -174,7 +174,7 @@
     type-is "^1.6.18"
     vary "^1.1.2"
 
-"@adonisjs/ioc-transformer@^2.3.2":
+"@adonisjs/ioc-transformer@^2.2.1", "@adonisjs/ioc-transformer@^2.3.2":
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@adonisjs/ioc-transformer/-/ioc-transformer-2.3.2.tgz#1d48fc74d6bb4c3cb41cd2dfebd8a822db72b6b7"
   integrity sha512-v9wRPAHivbCGo43D8r87dcpUQ6SaxO5/ypeVntqS/nZscujEfcLhudBL0iP2iEnzNrth0XmI00mksj0fvHO6LA==
@@ -207,7 +207,7 @@
     parse-imports "0.0.5"
     string-width "^4.2.2"
 
-"@adonisjs/require-ts@^2.0.8":
+"@adonisjs/require-ts@^2.0.4", "@adonisjs/require-ts@^2.0.8":
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/@adonisjs/require-ts/-/require-ts-2.0.8.tgz#bfc9e831bb03ec3007a634d52d1fbeda75808729"
   integrity sha512-2YxA+svP6kjkK21IN1iMBN4tTylCFf2Q7R7NVrV+Kcr+GwjzV3IGRV+nOQz1ZyO352UkX7HsQ2JZ7u7dALT/5A==
@@ -1357,6 +1357,15 @@ acorn@^8.0.5, acorn@^8.2.4:
   version "8.4.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.4.1.tgz#56c36251fc7cabc7096adc18f05afe814321a28c"
   integrity sha512-asabaBSkEKosYKMITunzX177CXxQ4Q8BSSzMTKD+FefUhipQC70gfW5SiUDhYQ3vk8G+81HqQk7Fv9OXwwn9KA==
+
+adonis-jest@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/adonis-jest/-/adonis-jest-2.0.1.tgz#aa02e460504cefc294371235df5bd97034bf2208"
+  integrity sha512-qgH4y/tz2eUE0lsMPk9Ktll8nsMMZdPKvpstyDgE6kollBMj8/YiaQoLWO3uZ2eWa9UsOIrl3XPbj5uxdw1EIw==
+  dependencies:
+    "@adonisjs/ioc-transformer" "^2.2.1"
+    "@adonisjs/require-ts" "^2.0.4"
+    jest-environment-node "^27.0.3"
 
 adonis-preset-ts@^2.1.0:
   version "2.1.0"
@@ -3875,7 +3884,7 @@ jest-environment-jsdom@^27.1.0:
     jest-util "^27.1.0"
     jsdom "^16.6.0"
 
-jest-environment-node@^27.1.0:
+jest-environment-node@^27.0.3, jest-environment-node@^27.1.0:
   version "27.1.0"
   resolved "https://registry.yarnpkg.com/jest-environment-node/-/jest-environment-node-27.1.0.tgz#feea6b765f1fd4582284d4f1007df2b0a8d15b7f"
   integrity sha512-JIyJ8H3wVyM4YCXp7njbjs0dIT87yhGlrXCXhDKNIg1OjurXr6X38yocnnbXvvNyqVTqSI4M9l+YfPKueqL1lw==
