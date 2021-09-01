@@ -1,8 +1,10 @@
 import { MissingParamError } from './error/missing-param-error'
+import { AccountModel } from 'src/data/models/account'
 import { SingUpController } from './sing-up'
 import { EmailValidator } from './protocols'
 import { InvalidParamError } from './error/invalid-param-error'
 import test from 'japa'
+import { AddAccountModel } from 'src/data/use-cases/add-account'
 interface Sut {
   sut: SingUpController
   invalidEmailSut: SingUpController
@@ -26,10 +28,25 @@ const makeEmailValidator = () => {
   }
 }
 
+const makeAddAccount = () => {
+  class AddAccount {
+    public async add(account: AddAccountModel): Promise<AccountModel> {
+      return {
+        id: 'valid_id',
+        name: 'any_name',
+        email: 'valid_mail@mail.com',
+        password: '123456',
+      }
+    }
+  }
+  return new AddAccount()
+}
+
 const makeSut = (): Sut => {
+  const AddAccount = makeAddAccount()
   const { emailValidatorStub, emailValidatorStubFalse } = makeEmailValidator()
-  const sut = new SingUpController(emailValidatorStub)
-  const invalidEmailSut = new SingUpController(emailValidatorStubFalse)
+  const sut = new SingUpController(emailValidatorStub, AddAccount)
+  const invalidEmailSut = new SingUpController(emailValidatorStubFalse, AddAccount)
   return {
     sut,
     invalidEmailSut,
@@ -143,7 +160,6 @@ test.group('SingUp', () => {
       id: 'valid_id',
       name: 'any_name',
       email: 'valid_mail@mail.com',
-      passwordConfirmation: '123456',
       password: '123456',
     })
     assert.equal(httpResponse.statusCode, 200)

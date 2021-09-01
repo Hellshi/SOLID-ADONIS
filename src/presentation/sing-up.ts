@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import { AddAccount } from 'src/data/use-cases/add-account'
 import { InvalidParamError } from './error/invalid-param-error'
 import { MissingParamError } from './error/missing-param-error'
 import { badRequest } from './helpers'
@@ -6,9 +7,11 @@ import { HttpResponse, HttRequest, Controller, EmailValidator } from './protocol
 
 export class SingUpController implements Controller {
   private readonly emailValidator: EmailValidator
+  private readonly addAccount: AddAccount
 
-  constructor(emailValidator: EmailValidator) {
+  constructor(emailValidator: EmailValidator, addAccount: AddAccount) {
     this.emailValidator = emailValidator
+    this.addAccount = addAccount
   }
   public async handle(httpResquest: HttRequest): Promise<HttpResponse> {
     try {
@@ -30,15 +33,15 @@ export class SingUpController implements Controller {
         return badRequest(new InvalidParamError('email'));
       }
 
+    const account = await this.addAccount.add({
+      name,
+      email,
+      password
+    })
+
     return {
       statusCode: 200,
-      body: {
-        id: 'valid_id',
-        name: 'any_name',
-        email: 'valid_mail@mail.com',
-        passwordConfirmation: '123456',
-        password: '123456',
-      },
+      body: account
     }
   } catch(err){
     console.log('erro??')
