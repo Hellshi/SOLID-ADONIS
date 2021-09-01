@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { AddAccount } from 'src/data/use-cases/add-account'
+import { ServerError } from './error/internal-server-error'
 import { InvalidParamError } from './error/invalid-param-error'
 import { MissingParamError } from './error/missing-param-error'
-import { badRequest } from './helpers'
+import { badRequest, internalServerError, ok } from './helpers'
 import { HttpResponse, HttRequest, Controller, EmailValidator } from './protocols'
 
 export class SingUpController implements Controller {
@@ -39,12 +40,9 @@ export class SingUpController implements Controller {
       password
     })
 
-    return {
-      statusCode: 200,
-      body: account
-    }
+    return ok(account)
+
   } catch(err){
-    console.log('erro??')
-    return badRequest(new InvalidParamError(''));
+    return internalServerError(new ServerError())
   }
 }}

@@ -4,3 +4,17 @@ export const badRequest = (error: Error) => {
     body: error,
   }
 }
+
+export const ok = (data: any) => {
+  return {
+    statusCode: 200,
+    body: data,
+  }
+}
+
+export const internalServerError = (error: Error) => {
+  return {
+    statusCode: 500,
+    body: error,
+  }
+}
