@@ -19,22 +19,29 @@ export class SingUpController implements Controller {
           return badRequest(new MissingParamError(field));
         }
       }
-      const { name, email, passwordConfirm, password } = httpResquest.body;
+      const { name, email, passwordConfirmation, password } = httpResquest.body;
 
-      if (password !== passwordConfirm) {
-        return badRequest(new InvalidParamError());
+      if (password !== passwordConfirmation) {
+        return badRequest(new InvalidParamError('password confirmation'));
       }
-      const isValid = this.emailValidator.isValid(email);
+      const isValid = await this.emailValidator.isValid(email);
 
       if (!isValid) {
-        return badRequest(new InvalidParamError());
+        return badRequest(new InvalidParamError('email'));
       }
 
     return {
       statusCode: 200,
-      body: '',
+      body: {
+        id: 'valid_id',
+        name: 'any_name',
+        email: 'valid_mail@mail.com',
+        passwordConfirmation: '123456',
+        password: '123456',
+      },
     }
   } catch(err){
-    return badRequest(new InvalidParamError());
+    console.log('erro??')
+    return badRequest(new InvalidParamError(''));
   }
 }}

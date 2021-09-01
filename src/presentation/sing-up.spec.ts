@@ -5,7 +5,6 @@ import { InvalidParamError } from './error/invalid-param-error'
 import test from 'japa'
 interface Sut {
   sut: SingUpController
-  emailValidatorStub: EmailValidator
   invalidEmailSut: SingUpController
 }
 const makeEmailValidator = () => {
@@ -19,9 +18,11 @@ const makeEmailValidator = () => {
       return false
     }
   }
+  const emailValidatorStub = new EmailValidatorStub()
+  const emailValidatorStubFalse = new EmailValidatorStubFalse()
   return {
-    emailValidatorStub: new EmailValidatorStub(),
-    emailValidatorStubFalse: new EmailValidatorStubFalse(),
+    emailValidatorStub,
+    emailValidatorStubFalse,
   }
 }
 
@@ -31,7 +32,6 @@ const makeSut = (): Sut => {
   const invalidEmailSut = new SingUpController(emailValidatorStubFalse)
   return {
     sut,
-    emailValidatorStub,
     invalidEmailSut,
   }
 }
@@ -107,9 +107,45 @@ test.group('SingUp', () => {
       },
     }
     const httpResponse = await invalidEmailSut.handle(httpRequest)
-    console.log(httpResponse)
-    const error = new InvalidParamError()
+    const error = new InvalidParamError('email')
     assert.include(httpResponse.body, error)
     assert.equal(httpResponse.statusCode, 400)
+  })
+
+  test('Should return 400 when password confirmation fails', async (assert) => {
+    const { invalidEmailSut } = makeSut()
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'from',
+        passwordConfirmation: '123456',
+        password: '123456',
+      },
+    }
+    const httpResponse = await invalidEmailSut.handle(httpRequest)
+    const error = new InvalidParamError('password confirmation')
+    assert.include(httpResponse.body, error)
+    assert.equal(httpResponse.statusCode, 400)
+  })
+
+  test('Should return an account on suceess', async (assert) => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'valid_mail@mail.com',
+        passwordConfirmation: '123456',
+        password: '123456',
+      },
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    assert.include(httpResponse.body, {
+      id: 'valid_id',
+      name: 'any_name',
+      email: 'valid_mail@mail.com',
+      passwordConfirmation: '123456',
+      password: '123456',
+    })
+    assert.equal(httpResponse.statusCode, 200)
   })
 })
