@@ -10,7 +10,7 @@ test.group('Email Validation', () => {
   })
   test('should return undefined when email is valid', async (assert) => {
     const validator = makeSut()
-    const response = await validator.isValid('invalid_mail')
+    const response = await validator.isValid('valid_mail@mail.com')
     assert.equal(response, true)
   })
 })
