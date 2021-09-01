@@ -1,10 +1,10 @@
 import { MissingParamError } from './error/missing-param-error'
-import { AccountModel } from 'src/data/models/account'
+import { AccountModel } from 'src/domain/models/account'
 import { SingUpController } from './sing-up'
 import { EmailValidator } from './protocols'
 import { InvalidParamError } from './error/invalid-param-error'
 import test from 'japa'
-import { AddAccountModel } from 'src/data/use-cases/add-account'
+import { AddAccountModel } from 'src/domain/use-cases/add-account'
 interface Sut {
   sut: SingUpController
   invalidEmailSut: SingUpController
