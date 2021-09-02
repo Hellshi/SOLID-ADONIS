@@ -31,7 +31,7 @@ async function rollbackMigrations() {
  * Configure test runner
  */
 configure({
-  files: ['src/**/*.spec.ts'],
+  files: ['src/**/*.test.ts'],
   after: [rollbackMigrations],
   before: [runMigrations, startHttpServer],
 })
