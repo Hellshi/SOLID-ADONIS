@@ -40,7 +40,11 @@ export class SingUpController implements Controller {
       password
     })
 
-    return ok(account)
+    return ok({
+      id: account.id,
+      name,
+      password: account.password
+    })
 
   } catch(err){
     return internalServerError(new ServerError())

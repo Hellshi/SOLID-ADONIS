@@ -1,7 +1,7 @@
 export const badRequest = (error: Error) => {
   return {
     statusCode: 400,
-    body: error,
+    body: error.message,
   }
 }
 
@@ -15,6 +15,6 @@ export const ok = (data: any) => {
 export const internalServerError = (error: Error) => {
   return {
     statusCode: 500,
-    body: error,
+    body: error.message,
   }
 }

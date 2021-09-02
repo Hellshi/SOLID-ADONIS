@@ -19,9 +19,5 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-import { validateMail } from 'App/Validators/email-validator'
 
-Route.get('/', async () => {
-  const valid = await validateMail('a')
-  console.log(valid)
-})
+Route.post('/sing-up', 'SingUpsController.singUp')
