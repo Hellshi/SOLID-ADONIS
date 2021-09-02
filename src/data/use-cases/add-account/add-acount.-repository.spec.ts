@@ -1,7 +1,7 @@
 import test from 'japa'
 import { AccountModel } from 'src/domain/models/account'
 import { AddAccountModel } from 'src/domain/use-cases/add-account'
-import { AddAccountRepository } from '../protocols/add-account-repository'
+import { AddAccountRepository } from '../../protocols/add-account-repository'
 import { DbAddAccount } from './add-account-repository'
 
 test.group('Add account', () => {
@@ -69,6 +69,7 @@ test.group('Add account', () => {
       password: '123456',
     }
     const promise = await sut.add(fakeUser)
+    // @ts-ignore
     assert.include(promise, {
       id: 'valid_id',
       name: 'valid_name',
