@@ -47,6 +47,7 @@ export class SingUpController implements Controller {
     })
 
   } catch(err){
+    console.log(err)
     return internalServerError(new ServerError())
   }
 }}

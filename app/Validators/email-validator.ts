@@ -4,7 +4,10 @@ export const validateMail = async (email: string) => {
   try {
     await validator.validate({
       schema: schema.create({
-        email: schema.string({ trim: true }, [rules.email()]),
+        email: schema.string({ trim: true }, [
+          rules.email(),
+          rules.unique({ table: 'users', column: 'email' }),
+        ]),
       }),
       data: {
         email: email,

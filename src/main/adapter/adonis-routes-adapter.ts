@@ -3,7 +3,6 @@ import { Controller, HttpResponse, HttRequest } from '../../../src/presentation/
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export const adaptRoute = (controller: Controller) => async ({ request, response }: HttpContextContract) => {
-    console.log({body: { body: request.body() }})
     const httpRequest: HttRequest = { body: request.body() }
     const httpResponse: HttpResponse = await controller.handle(httpRequest)
     response.status(httpResponse.statusCode).json(httpResponse.body)
